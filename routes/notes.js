@@ -2,16 +2,16 @@ const express = require('express');
 const router = express.Router;
 
 router.route('/')
-    .get((req, res) => {
+  .get((req, res) => {
 
-    })
-    .post((req, res) => {
+  })
+  .post((req, res) => {
 
-    });
+  });
 
 router.route('/:id')
-    .delete((req, res) => {
+  .delete((req, res) => {
 
-    });
+  });
 
 module.exports = router;
