@@ -3,11 +3,10 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const sassMiddleware = require('node-sass-middleware');
 
 const usersRouter = require('./routes/users');
-const booksRouter = require('./routes/books');
-const notesRouter = require('./routes/notes');
+// const booksRouter = require('./routes/books');
+// const notesRouter = require('./routes/notes');
 
 const app = express();
 
@@ -19,17 +18,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(sassMiddleware({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  indentedSyntax: false, // true = .sass and false = .scss
-  sourceMap: true
-}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/users', usersRouter);
-app.use('/api/books', booksRouter);
-app.use('/api/books/:isbn', notesRouter);
+// app.use('/api/books', booksRouter);
+// app.use('/api/books/:isbn', notesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
