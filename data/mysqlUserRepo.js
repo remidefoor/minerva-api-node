@@ -1,4 +1,5 @@
-// pruned
+'use strict';
+
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcrypt');
 
