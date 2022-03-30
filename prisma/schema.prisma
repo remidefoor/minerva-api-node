@@ -1,3 +1,4 @@
+// pruned
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,7 +15,7 @@ model User {
   rememberToken  String?     @db.VarChar(100) @map("remember_token")
   createdAt      DateTime?   @db.Timestamp(0) @map("created_at")
   updatedAt      DateTime?   @db.Timestamp(0) @map("updated_at")
-  booksUser      BookUser[]
+  userBooks      BookUser[]
   notes          Note[]
 
   @@map("users")
