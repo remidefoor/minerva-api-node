@@ -1,21 +1,21 @@
 'use strict';
 
-const { PrismaClient } = require('@prisma/client');
-const bcrypt = require('bcrypt');
-
 const BCRYPT_ROUNDS = 10;
+
+const { PrismaClient } = require('@prisma/client');
+const bcryptjs = require('bcryptjs');
 
 const prisma = new PrismaClient();
 
-async function createUser(user) {
-  await prisma.user.create({
+async function createUser(email, password) {
+  return prisma.user.create({
     data: {
-      email: user.email,
-      password: bcrypt.hash(user.password, BCRYPT_ROUNDS)
+      email: email,
+      password: await bcryptjs.hash(password, BCRYPT_ROUNDS)
     }
   });
 }
 
 module.exports = {
-
+  createUser
 };
