@@ -30,10 +30,6 @@ function getUserByEmail(email) {
   });
 }
 
-async function userExists(email) {
-  return await getUserByEmail(email) !== null;
-}
-
 module.exports = {
   createUser,
   getUserId

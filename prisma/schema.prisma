@@ -15,13 +15,13 @@ model User {
   rememberToken  String?     @db.VarChar(100) @map("remember_token")
   createdAt      DateTime?   @db.Timestamp(0) @map("created_at")
   updatedAt      DateTime?   @db.Timestamp(0) @map("updated_at")
-  userBooks      BookUser[]
+  userBooks      UserBook[]
   notes          Note[]
 
   @@map("users")
 }
 
-model BookUser {
+model UserBook {
   userId     BigInt    @db.UnsignedBigInt @map("user_id")
   isbn       String    @db.VarChar(13) @map("ISBN")
   createdAt  DateTime? @db.Timestamp(0) @map("created_at")
