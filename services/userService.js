@@ -3,10 +3,15 @@
 const mySqlUserRepo = require('../data/mysqlUserRepo');
 
 async function addUser(body) {
-  const usr = await mySqlUserRepo.createUser(body.email, body.password);
-  return usr.id.toString();
+  const user = await mySqlUserRepo.createUser(body.email, body.password);
+  return user.id.toString();
+}
+
+function logIn(body) {
+  return mySqlUserRepo.getUserId(body.email, body.password);
 }
 
 module.exports = {
-  addUser
+  addUser,
+  logIn
 }
