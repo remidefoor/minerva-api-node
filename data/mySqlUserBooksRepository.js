@@ -4,7 +4,7 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-async function readUserBooks(userId) {
+function readUserBooks(userId) {
   return prisma.UserBook.findMany({
     where: {
       userId: BigInt(userId)
@@ -22,5 +22,6 @@ function createUserBook(userBook) {
 }
 
 module.exports = {
-  readUserBooks
+  readUserBooks,
+  createUserBook
 }

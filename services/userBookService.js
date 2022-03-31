@@ -10,8 +10,10 @@ async function retrieveUserBooks(userId) {
   return mySqlUserBooksRepository.readUserBooks(userId);
 }
 
-function addBook(userId, body) {
-
+async function addUserBook(userId, body) {
+  await validateUserExists(userId);
+  const userBook = { isbn: body.isbn};
+  mySqlUserBooksRepository.createUserBook(userBook);
 }
 
 async function validateUserExists(userId) {
@@ -27,5 +29,6 @@ function getUserById(userId) {
 }
 
 module.exports = {
-  retrieveUserBooks
+  retrieveUserBooks,
+  addUserBook
 }
