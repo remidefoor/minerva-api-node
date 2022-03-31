@@ -1,6 +1,6 @@
 'use strict';
 
-const mySqlUserRepo = require('../data/mysqlUserRepo');
+const mySqlUserRepo = require('../data/mysqlUserRepository');
 
 async function addUser(body) {
   const user = await mySqlUserRepo.createUser(body.email, body.password);
