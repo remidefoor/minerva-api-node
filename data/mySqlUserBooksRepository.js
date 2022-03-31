@@ -5,7 +5,6 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function readUserBooks(userId) {
-  if (!(await userExists(userId))) throw 'not found';
   return prisma.UserBook.findMany({
     where: {
       userId: BigInt(userId)
@@ -16,15 +15,9 @@ async function readUserBooks(userId) {
   });
 }
 
-async function userExists(userId) {
-  return await getUserById(userId) !== null;
-}
-
-function getUserById(userId) {
-  return prisma.User.findUnique({
-    where: {
-      id: BigInt(userId)
-    }
+function createUserBook(userBook) {
+  prisma.UserBook.create({
+    data: userBook
   });
 }
 
