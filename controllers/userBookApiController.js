@@ -5,16 +5,12 @@ const { validationResult } = require('express-validator');
 const userBookService = require('../services/userBookService');
 
 async function getUserBooks(req, res) {
-  const userId = req.params.userId;
   try {
     res.status(200)
-      .send(await userBookService.retrieveUserBooks(userId));
-  } catch (ex) {
-    res.status(404)
-      .send({
-        message: `The user with ID ${userId} has not been found.`,
-        error: []
-      });
+      .send(await userBookService.retrieveUserBooks(req.params.userId));
+  } catch (error) {
+    res.status(error.status)
+      .send(error);
   }
 }
 

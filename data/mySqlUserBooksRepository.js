@@ -4,7 +4,7 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-function readUserBooks(userId) {
+async function readUserBooks(userId) {
   return prisma.UserBook.findMany({
     where: {
       userId: BigInt(userId)

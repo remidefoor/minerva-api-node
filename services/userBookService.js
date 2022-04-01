@@ -1,6 +1,7 @@
 'use strict';
 
 const { PrismaClient } = require('@prisma/client');
+const createError = require('http-errors');
 
 const mySqlUserBooksRepository = require('../data/mySqlUserBooksRepository');
 const prisma = new PrismaClient();
@@ -17,10 +18,12 @@ async function addUserBook(userId, body) {
 }
 
 async function validateUserExists(userId) {
-  if (await getUserById(userId) === null) throw 'not found';
+  if (await getUserById(userId) === null) {
+    throw createError(404, `The user with ID ${userId} has not been found.`, { errors: [] });
+  }
 }
 
-function getUserById(userId) {
+async function getUserById(userId) {
   return prisma.User.findUnique({
     where: {
       id: BigInt(userId)
