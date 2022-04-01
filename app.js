@@ -6,8 +6,8 @@ const path = require('path');
 const logger = require('morgan');
 
 const userRouter = require('./routes/userRoutes');
-const userBookRouter = require('/.routes/userBookRoutes');
-const noteRouter = require('/.routes/noteRoutes');
+const userBookRouter = require('./routes/userBookRoutes');
+const noteRouter = require('./routes/noteRoutes');
 
 const app = express();
 
@@ -24,17 +24,15 @@ app.use('/api/users/:userId/books', userBookRouter);
 app.use('/api/users/:userId/books/:isbn/notes', noteRouter);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => next(createError(404)));
+app.use((req, res, next) => {
+  next(createError(404, 'The requested page does not exist.', { errors: [] }));
+});
 
 // error handler
 app.use((err, req, res, next) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.send(err);
+  res.status(err.status || 500)
+    .send(err)
+    .end();
 });
 
 module.exports = app;
