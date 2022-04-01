@@ -18,8 +18,6 @@ router.route('/')
   );
 
 router.route('/:isbn')
-  .delete((res, req) => {
-
-  });
+  .delete(userBookApiController.deleteUserBook);
 
 module.exports = router;

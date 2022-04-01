@@ -15,8 +15,8 @@ async function readUserBooks(userId) {
   });
 }
 
-function createUserBook(userId, isbn) {
-  return prisma.UserBook.create({
+async function createUserBook(userId, isbn) {
+  await prisma.UserBook.create({
     data: {
       userId: BigInt(userId),
       isbn: isbn
@@ -24,7 +24,19 @@ function createUserBook(userId, isbn) {
   });
 }
 
+async function deleteUserBook(userId, isbn) {
+  await prisma.UserBook.delete({
+    where: {
+      isbn_userId: {
+        userId: BigInt(userId),
+        isbn: isbn
+      }
+    }
+  })
+}
+
 module.exports = {
   readUserBooks,
-  createUserBook
+  createUserBook,
+  deleteUserBook
 }

@@ -16,21 +16,39 @@ async function addUserBook(userId, body) {
   await mySqlUserBooksRepository.createUserBook(userId, body.isbn);
 }
 
-async function validateUserExists(userId) {
-  if (await getUserById(userId) === null) {
-    throw createError(404, `The user with ID ${userId} has not been found.`, { errors: [] });
-  }
+async function removeUserBook(userId, isbn) {
+  await validateUserExists(userId);
+  await validateUserBookExists(userId, isbn);
+  await mySqlUserBooksRepository.deleteUserBook(userId, isbn);
 }
 
-async function getUserById(userId) {
-  return prisma.User.findUnique({
+async function validateUserExists(userId) {
+  const user = await prisma.User.findUnique({
     where: {
       id: BigInt(userId)
     }
   });
+  if (user === null) {
+    throw createError(404, `The user with ID ${userId} has not been found.`, { errors: [] });
+  }
+}
+
+async function validateUserBookExists(userId, isbn) {
+  const userBook = await prisma.UserBook.findUnique({
+    where: {
+      isbn_userId: {
+        userId: BigInt(userId),
+        isbn: isbn
+      }
+    }
+  });
+  if (userBook === null) {
+    throw createError(404, `The book with ISBN ${isbn} has not been found for the current user.`, { errors: [] });
+  }
 }
 
 module.exports = {
   retrieveUserBooks,
-  addUserBook
+  addUserBook,
+  removeUserBook
 }
