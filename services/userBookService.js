@@ -13,8 +13,7 @@ async function retrieveUserBooks(userId) {
 
 async function addUserBook(userId, body) {
   await validateUserExists(userId);
-  const userBook = { isbn: body.isbn};
-  mySqlUserBooksRepository.createUserBook(userBook);
+  await mySqlUserBooksRepository.createUserBook(userId, body.isbn);
 }
 
 async function validateUserExists(userId) {

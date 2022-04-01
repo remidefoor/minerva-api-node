@@ -15,9 +15,12 @@ async function readUserBooks(userId) {
   });
 }
 
-function createUserBook(userBook) {
-  prisma.UserBook.create({
-    data: userBook
+function createUserBook(userId, isbn) {
+  return prisma.UserBook.create({
+    data: {
+      userId: BigInt(userId),
+      isbn: isbn
+    }
   });
 }
 
