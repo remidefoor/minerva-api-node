@@ -2,14 +2,20 @@
 
 const express = require('express');
 const router = express.Router({ mergeParams: true });
+const { body } = require('express-validator');
 
 const noteApiController = require('../controllers/noteApiController');
 
 router.route('/')
   .get(noteApiController.getNotes)
-  .post((req, res) => {
-
-  });
+  .post(
+    body('note')
+      .exists({ checkFalsy: true })
+      .withMessage('The note field is required.')
+      .isString()
+      .withMessage('The note must be a string.'),
+    noteApiController.postNote
+  );
 
 router.route('/:id')
   .delete((req, res) => {

@@ -17,6 +17,17 @@ function readNotes(userId, isbn) {
   });
 }
 
+function createNote(userId, isbn, note) {
+  return prisma.Note.create({
+    data: {
+      userId: BigInt(userId),
+      isbn: isbn,
+      note: note
+    }
+  });
+}
+
 module.exports = {
-  readNotes
+  readNotes,
+  createNote
 };

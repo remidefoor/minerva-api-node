@@ -21,6 +21,12 @@ function convertNoteIdsToInts(notes) {
   return notes;
 }
 
+async function addNote(userId, isbn, body) {
+  await validateUserExists(userId);
+  await validateUserBookExists(userId, isbn);
+  return mySqlNotesRepository.createNote(userId, isbn, body.note);
+}
+
 async function validateUserExists(userId) {
   const user = await prisma.User.findUnique({
     where: {
@@ -45,5 +51,6 @@ async function validateUserBookExists(userId, isbn) {
 }
 
 module.exports = {
-  retrieveNotes
+  retrieveNotes,
+  addNote
 };
