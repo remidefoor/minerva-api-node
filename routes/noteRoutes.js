@@ -17,9 +17,7 @@ router.route('/')
     noteApiController.postNote
   );
 
-router.route('/:id')
-  .delete((req, res) => {
-
-  });
+router.route('/:noteId')
+  .delete(noteApiController.deleteNote);
 
 module.exports = router;

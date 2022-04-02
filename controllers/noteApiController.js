@@ -40,7 +40,22 @@ async function postNote(req, res) {
   }
 }
 
+async function deleteNote(req, res) {
+  try {
+    await noteService.removeNote(req.params.userId, req.params.isbn, req.params.noteId);
+    res.status(204)
+      .send();
+  } catch (ex) {
+    if (ex.status === 404) {
+      res.status(ex.status)
+        .send(ex);
+    }
+    console.log(ex);
+  }
+}
+
 module.exports = {
   getNotes,
-  postNote
+  postNote,
+  deleteNote
 };

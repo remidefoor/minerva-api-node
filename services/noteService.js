@@ -27,6 +27,13 @@ async function addNote(userId, isbn, body) {
   return mySqlNotesRepository.createNote(userId, isbn, body.note);
 }
 
+async function removeNote(userId, isbn, noteId) {
+  await validateUserExists(userId);
+  await validateUserBookExists(userId, isbn);
+  await validateNoteExists(userId, isbn, noteId);
+  await mySqlNotesRepository.deleteNote(noteId);
+}
+
 async function validateUserExists(userId) {
   const user = await prisma.User.findUnique({
     where: {
@@ -50,7 +57,19 @@ async function validateUserBookExists(userId, isbn) {
   }
 }
 
+async function validateNoteExists(userId, isbn, noteId) {
+  const note = await prisma.Note.findUnique({
+    where: {
+      id: BigInt(noteId),
+    }
+  });
+  if (note === null || note.userId !== BigInt(userId) || note.isbn !== isbn) {
+    throw createError(404, `A note with ID ${noteId} has not been found for the current user and book.`, { errors: [] });
+  }
+}
+
 module.exports = {
   retrieveNotes,
-  addNote
+  addNote,
+  removeNote
 };

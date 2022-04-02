@@ -27,7 +27,16 @@ function createNote(userId, isbn, note) {
   });
 }
 
+async function deleteNote(noteId) {
+  await prisma.Note.delete({
+    where: {
+      id: BigInt(noteId)
+    }
+  });
+}
+
 module.exports = {
   readNotes,
-  createNote
+  createNote,
+  deleteNote
 };
