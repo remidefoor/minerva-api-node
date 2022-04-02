@@ -1,21 +1,27 @@
 'use strict';
 
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const logger = require('morgan');
+const createError = require('http-errors');
 
+const app = express();
 const userRouter = require('./routes/userRoutes');
 const userBookRouter = require('./routes/userBookRoutes');
 const noteRouter = require('./routes/noteRoutes');
-
-const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// create write stream (append mode)
+const accessLogStream = fs.createWriteStream(path.join(__dirname, '..', 'logs', 'access.log'), { flags: 'a' });
+// file logging
+app.use(logger('combined', { stream: accessLogStream }));
+// console logging
 app.use(logger('dev'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
