@@ -1,12 +1,12 @@
 'use strict';
 
 const express = require('express');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
+
+const noteApiController = require('../controllers/noteApiController');
 
 router.route('/')
-  .get((req, res) => {
-
-  })
+  .get(noteApiController.getNotes)
   .post((req, res) => {
 
   });
