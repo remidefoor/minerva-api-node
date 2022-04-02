@@ -51,4 +51,4 @@ module.exports = {
   retrieveUserBooks,
   addUserBook,
   removeUserBook
-}
+};

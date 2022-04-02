@@ -62,4 +62,4 @@ module.exports = {
   getUserBooks,
   postUserBook,
   deleteUserBook
-}
+};
