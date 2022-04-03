@@ -1,5 +1,5 @@
 const mySqlUserBooksRepository = require('../data/mySqlUserBooksRepository');
-const validationService = require('validationService');
+const validationService = require('./validationService');
 
 async function retrieveUserBooks (userId) {
   await validationService.validateUserExistenceById(userId);

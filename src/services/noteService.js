@@ -1,5 +1,5 @@
 const mySqlNotesRepository = require('../data/mySqlNotesRepository');
-const validationService = require('validationService');
+const validationService = require('./validationService');
 
 async function retrieveNotes (userId, isbn) {
   await validationService.validateUserExistenceById(userId);

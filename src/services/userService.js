@@ -1,5 +1,5 @@
 const mySqlUserRepository = require('../data/mySqlUserRepository');
-const validationService = require('validationService');
+const validationService = require('./validationService');
 
 async function addUser (body) {
   const user = await mySqlUserRepository.createUser(body.email, body.password);
