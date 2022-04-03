@@ -21,7 +21,7 @@ async function validateUserExists(email) {
       email: email
     }
   });
-  if (user === null) throw createError(404, 'The username or password is invalid.', { errors: [] });
+  if (user === null) throw createError(403, 'The username or password is invalid.', { errors: [] });
 }
 
 module.exports = {

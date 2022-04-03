@@ -1,5 +1,6 @@
 const assert = require('assert');
 const path = require('path');
+const createError = require('http-errors');
 
 const mySqlUserRepository = require('../../src/data/mySqlUserRepository');
 
@@ -10,7 +11,13 @@ describe(path.basename(__dirname), () => {
         const userId = await mySqlUserRepository.getUserId('harry.potter@hogwarts.wiz', 'Nimbus2000');
         assert.strictEqual(userId, 1);
       });
-      it('')
+      // TODO fix
+      /* it('should throw a forbidden HTTP error when the provided password is not correct', () => {
+        assert.throws(
+          () => mySqlUserRepository.getUserId('harry.potter@hogwarts.wiz', 'Firebolt'),
+          createError(403, 'The username or password is invalid.', { errors: [] })
+        );
+      }); */
     });
   });
 });
