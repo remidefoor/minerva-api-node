@@ -1,11 +1,9 @@
-'use strict';
-
 const createError = require('http-errors');
 const { validationResult } = require('express-validator');
 
 const noteService = require('../services/noteService');
 
-async function getNotes(req, res) {
+async function getNotes (req, res) {
   try {
     res.status(200)
       .send(await noteService.retrieveNotes(req.params.userId, req.params.isbn));
@@ -17,7 +15,7 @@ async function getNotes(req, res) {
   }
 }
 
-async function postNote(req, res) {
+async function postNote (req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     res.status(400)
@@ -40,7 +38,7 @@ async function postNote(req, res) {
   }
 }
 
-async function deleteNote(req, res) {
+async function deleteNote (req, res) {
   try {
     await noteService.removeNote(req.params.userId, req.params.isbn, req.params.noteId);
     res.status(204)

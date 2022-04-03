@@ -1,10 +1,8 @@
-'use strict';
-
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-function readUserBooks(userId) {
+function readUserBooks (userId) {
   return prisma.UserBook.findMany({
     where: {
       userId: BigInt(userId)
@@ -15,7 +13,7 @@ function readUserBooks(userId) {
   });
 }
 
-async function createUserBook(userId, isbn) {
+async function createUserBook (userId, isbn) {
   await prisma.UserBook.create({
     data: {
       userId: BigInt(userId),
@@ -24,7 +22,7 @@ async function createUserBook(userId, isbn) {
   });
 }
 
-async function deleteUserBook(userId, isbn) {
+async function deleteUserBook (userId, isbn) {
   await prisma.UserBook.delete({
     where: {
       isbn_userId: {
@@ -32,7 +30,7 @@ async function deleteUserBook(userId, isbn) {
         isbn: isbn
       }
     }
-  })
+  });
 }
 
 module.exports = {

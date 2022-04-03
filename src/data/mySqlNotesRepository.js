@@ -1,10 +1,8 @@
-'use strict';
-
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-function readNotes(userId, isbn) {
+function readNotes (userId, isbn) {
   return prisma.Note.findMany({
     where: {
       userId: BigInt(userId),
@@ -17,7 +15,7 @@ function readNotes(userId, isbn) {
   });
 }
 
-function createNote(userId, isbn, note) {
+function createNote (userId, isbn, note) {
   return prisma.Note.create({
     data: {
       userId: BigInt(userId),
@@ -27,7 +25,7 @@ function createNote(userId, isbn, note) {
   });
 }
 
-async function deleteNote(noteId) {
+async function deleteNote (noteId) {
   await prisma.Note.delete({
     where: {
       id: BigInt(noteId)

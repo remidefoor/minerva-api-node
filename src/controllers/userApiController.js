@@ -1,11 +1,9 @@
-'use strict';
-
 const createError = require('http-errors');
 const { validationResult } = require('express-validator');
 
 const userService = require('../services/userService');
 
-async function postUser(req, res) {
+async function postUser (req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     res.status(400)
@@ -27,7 +25,7 @@ async function postUser(req, res) {
   }
 }
 
-async function logIn(req, res) {
+async function logIn (req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     res.status(400)

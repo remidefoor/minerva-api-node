@@ -1,11 +1,9 @@
-'use strict';
-
 const createError = require('http-errors');
 const { validationResult } = require('express-validator');
 
 const userBookService = require('../services/userBookService');
 
-async function getUserBooks(req, res) {
+async function getUserBooks (req, res) {
   try {
     res.status(200)
       .send(await userBookService.retrieveUserBooks(req.params.userId));
@@ -17,7 +15,7 @@ async function getUserBooks(req, res) {
   }
 }
 
-async function postUserBook(req, res) {
+async function postUserBook (req, res) {
   const errors = await validationResult(req);
   if (!errors.isEmpty()) {
     res.status(400)
@@ -43,7 +41,7 @@ async function postUserBook(req, res) {
   }
 }
 
-async function deleteUserBook(req, res) {
+async function deleteUserBook (req, res) {
   try {
     await userBookService.removeUserBook(req.params.userId, req.params.isbn);
     res.status(204)
