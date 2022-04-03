@@ -7,8 +7,8 @@ async function addUser(body) {
   return parseInt(user.id);
 }
 
-function logIn(data) {
-  return mySqlUserRepository.getUserId(data.email, data.password);
+function logIn(body) {
+  return mySqlUserRepository.getUserId(body.email, body.password);
 }
 
 module.exports = {

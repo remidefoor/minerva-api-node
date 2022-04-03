@@ -28,23 +28,23 @@ async function postUser(req, res) {
 }
 
 async function logIn(req, res) {
-  const error = validationResult(req);
-  if (!error.isEmpty()) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
     res.status(400)
-      .send({
-        message: 'The request contains an invalid body.',
-        errors: error.array().map(err => err.msg)
-      });
+      .send(createError(
+        400,
+        'The request contains an invalid body.',
+        { errors: errors.array().map(error => error.msg) }
+      ));
   } else {
     try {
       res.status(200)
         .send({ id: await userService.logIn(req.body) });
     } catch (ex) {
-      res.status(403)
-        .send({
-          message: 'The username or password is invalid.',
-          errors: []
-        });
+      if (ex.status) {
+        res.status(ex.status)
+          .send(ex);
+      }
     }
   }
 }

@@ -4,6 +4,7 @@ const BCRYPT_ROUNDS = 10;  // TODO move to .env
 
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
+const createError = require('http-errors');
 
 const prisma = new PrismaClient();
 
@@ -18,12 +19,12 @@ async function createUser(email, password) {
 
 async function getUserId(email, password) {
   const user = await getUserByEmail(email);
-  if (await bcrypt.compare(password, user.password)) return user.id.toString();
-  throw 'unauthorized';
+  if (await bcrypt.compare(password, user.password)) return parseInt(user.id);
+  throw createError(403, 'The username or password is invalid.', { errors: [] });
 }
 
 function getUserByEmail(email) {
-  return prisma.user.findUnique({
+  return prisma.User.findUnique({
     where: {
       email: email
     }
