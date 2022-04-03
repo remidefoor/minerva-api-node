@@ -48,7 +48,6 @@ async function deleteNote (req, res) {
       res.status(ex.status)
         .send(ex);
     }
-    console.log(ex);
   }
 }
 
