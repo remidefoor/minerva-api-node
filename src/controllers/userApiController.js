@@ -1,27 +1,28 @@
 'use strict';
 
+const createError = require('http-errors');
 const { validationResult } = require('express-validator');
 
 const userService = require('../services/userService');
 
-async function addUser(req, res) {
-  const error = validationResult(req);
-  if (!error.isEmpty()) {
+async function postUser(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
     res.status(400)
-      .send({
-        message: 'The request contains an invalid body.',
-        errors: error.array().map(err => err.msg)
-      });
+      .send(createError(
+        400,
+        'The request contains an invalid body.',
+        { errors: errors.array().map(error => error.msg) }
+      ));
   } else {
     try {
       res.status(201)
         .send({ id: await userService.addUser(req.body) });
     } catch (ex) {
-      res.status(409)
-        .send({
-          message: 'The email is already taken.',
-          errors: []
-        });
+      if (ex.code === 'P2002') {
+        res.status(409)
+          .send(createError(409, 'The email is already taken.', { errors: [] }));
+      }
     }
   }
 }
@@ -49,6 +50,6 @@ async function logIn(req, res) {
 }
 
 module.exports = {
-  addUser,
+  postUser,
   logIn
-}
+};
