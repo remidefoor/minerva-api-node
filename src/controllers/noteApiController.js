@@ -10,7 +10,7 @@ async function getNotes(req, res) {
     res.status(200)
       .send(await noteService.retrieveNotes(req.params.userId, req.params.isbn));
   } catch (ex) {
-    if (ex.status === 404) {
+    if (ex.status) {
       res.status(ex.status)
         .send(ex);
     }
@@ -32,7 +32,7 @@ async function postNote(req, res) {
       res.status(201)
         .send({ id: parseInt(note.id) });
     } catch (ex) {
-      if (ex.status === 404) {
+      if (ex.status) {
         res.status(ex.status)
           .send(ex);
       }
@@ -46,7 +46,7 @@ async function deleteNote(req, res) {
     res.status(204)
       .send();
   } catch (ex) {
-    if (ex.status === 404) {
+    if (ex.status) {
       res.status(ex.status)
         .send(ex);
     }

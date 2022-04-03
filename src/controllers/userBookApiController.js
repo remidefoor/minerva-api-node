@@ -10,7 +10,7 @@ async function getUserBooks(req, res) {
     res.status(200)
       .send(await userBookService.retrieveUserBooks(req.params.userId));
   } catch (ex) {
-    if (ex.status === 404) {
+    if (ex.status) {
       res.status(ex.status)
         .send(ex);
     }
@@ -32,7 +32,7 @@ async function postUserBook(req, res) {
       res.status(201)
         .send();
     } catch (ex) {
-      if (ex.status === 404) {
+      if (ex.status) {
         res.status(ex.status)
           .send(ex);
       } else if (ex.code === 'P2002') {
@@ -49,11 +49,9 @@ async function deleteUserBook(req, res) {
     res.status(204)
       .send();
   } catch (ex) {
-    if (ex.status === 404) {
+    if (ex.status) {
       res.status(ex.status)
         .send(ex);
-    } else if (ex.code = 'P2025') {
-
     }
   }
 }
