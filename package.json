@@ -1,6 +1,7 @@
 {
-  "name": "nodejs-backend",
-  "version": "0.0.0",
+  "name": "minerva-backend",
+  "description": "The Minerva Node.js HTTP API to manage users and their books and notes.",
+  "version": "1.0.0",
   "private": true,
   "main": "./bin/www",
   "scripts": {
@@ -11,7 +12,6 @@
   "dependencies": {
     "@prisma/client": "^3.11.1",
     "bcryptjs": "^2.4.3",
-    "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
