@@ -8,6 +8,7 @@ const app = express();
 const userRouter = require('./routes/userRoutes');
 const userBookRouter = require('./routes/userBookRoutes');
 const noteRouter = require('./routes/noteRoutes');
+const logRouter = require('./routes/logRoutes');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,9 +24,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// register routers
 app.use('/api/users', userRouter);
 app.use('/api/users/:userId/books', userBookRouter);
 app.use('/api/users/:userId/books/:isbn/notes', noteRouter);
+app.use('/logs', logRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
