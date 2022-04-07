@@ -13,7 +13,6 @@
         "ecmaVersion": "latest"
     },
     "rules": {
-        "semi": ["warn", "always"],
-        "strict": ["error", "global"]
+        "semi": ["warn", "always"]
     }
 }
