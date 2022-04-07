@@ -1,9 +1,9 @@
 const fsLogsRepository = require('../data/fsLogsRepository');
 
-function retrieveAccessLogs() {
+function retrieveAccessLogs () {
   return fsLogsRepository.readAccessLogs();
 }
 
 module.exports = {
   retrieveAccessLogs
-}
+};

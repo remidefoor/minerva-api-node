@@ -53,4 +53,4 @@ module.exports = {
   validateUserExistenceById,
   validateUserBookExistence,
   validateNoteExistence
-}
+};

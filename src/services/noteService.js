@@ -3,7 +3,7 @@ const validationService = require('./validationService');
 
 async function retrieveNotes (userId, isbn) {
   await validationService.validateUserExistenceById(userId);
-  await validateUserBookExists(userId, isbn);
+  await validationService.validateUserBookExistence(userId, isbn);
   const notes = await mySqlNotesRepository.readNotes(userId, isbn);
   const serializableNotes = convertNoteIdsToInts(notes);
   return serializableNotes;
