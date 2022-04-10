@@ -26,9 +26,9 @@ async function validateUserExistenceById (userId) {
 async function validateUserBookExistence (userId, isbn) {
   const userBook = await prisma.UserBook.findUnique({
     where: {
-      isbn_userId: {
+      ISBN_userId: {
         userId: BigInt(userId),
-        isbn: isbn
+        ISBN: isbn
       }
     }
   });
@@ -43,7 +43,7 @@ async function validateNoteExistence (userId, isbn, noteId) {
       id: BigInt(noteId)
     }
   });
-  if (note === null || note.userId !== BigInt(userId) || note.isbn !== isbn) {
+  if (note === null || note.userId !== BigInt(userId) || note.ISBN !== isbn) {
     throw createError(404, `A note with ID ${noteId} has not been found for the current user and book.`, { errors: [] });
   }
 }

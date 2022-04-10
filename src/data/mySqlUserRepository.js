@@ -1,4 +1,4 @@
-const BCRYPT_ROUNDS = 10; // TODO move to .env
+const BCRYPT_ROUNDS = 10;
 
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');

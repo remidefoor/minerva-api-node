@@ -6,7 +6,7 @@ function readNotes (userId, isbn) {
   return prisma.Note.findMany({
     where: {
       userId: BigInt(userId),
-      isbn: isbn
+      ISBN: isbn
     },
     select: {
       id: true,
@@ -19,7 +19,7 @@ function createNote (userId, isbn, note) {
   return prisma.Note.create({
     data: {
       userId: BigInt(userId),
-      isbn: isbn,
+      ISBN: isbn,
       note: note
     }
   });

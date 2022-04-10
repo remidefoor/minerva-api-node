@@ -23,12 +23,12 @@ model User {
 
 model UserBook {
   userId     BigInt    @db.UnsignedBigInt @map("user_id")
-  isbn       String    @db.VarChar(13) @map("ISBN")
+  ISBN       String    @db.VarChar(13)
   createdAt  DateTime? @db.Timestamp(0) @map("created_at")
   updatedAt  DateTime? @db.Timestamp(0) @map("updated_at")
   user       User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "book_user_user_id_foreign")
 
-  @@id([isbn, userId])
+  @@id([ISBN, userId])
   @@index([userId], map: "book_user_user_id_foreign")
 
   @@map("book_user")
@@ -37,7 +37,7 @@ model UserBook {
 model Note {
   id         BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
   userId     BigInt    @db.UnsignedBigInt @map("user_id")
-  isbn       String    @db.VarChar(13) @map("ISBN")
+  ISBN       String    @db.VarChar(13)
   note       String    @db.VarChar(255)
   createdAt  DateTime? @db.Timestamp(0) @map("created_at")
   updatedAt  DateTime? @db.Timestamp(0) @map("updated_at")

@@ -8,7 +8,7 @@ function readUserBooks (userId) {
       userId: BigInt(userId)
     },
     select: {
-      isbn: true
+      ISBN: true
     }
   });
 }
@@ -17,7 +17,7 @@ async function createUserBook (userId, isbn) {
   await prisma.UserBook.create({
     data: {
       userId: BigInt(userId),
-      isbn: isbn
+      ISBN: isbn
     }
   });
 }
@@ -25,9 +25,9 @@ async function createUserBook (userId, isbn) {
 async function deleteUserBook (userId, isbn) {
   await prisma.UserBook.delete({
     where: {
-      isbn_userId: {
+      ISBN_userId: {
         userId: BigInt(userId),
-        isbn: isbn
+        ISBN: isbn
       }
     }
   });
