@@ -1,8 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const cors = require('cors');
 const { body } = require('express-validator');
 
+const router = express.Router();
 const userApiController = require('../controllers/userApiController');
+
+router.use(cors({ origin: '*' }));
 
 router.post(
   '/',

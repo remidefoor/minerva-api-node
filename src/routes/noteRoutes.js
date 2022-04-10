@@ -1,8 +1,11 @@
 const express = require('express');
-const router = express.Router({ mergeParams: true });
+const cors = require('cors');
 const { body } = require('express-validator');
 
+const router = express.Router({ mergeParams: true });
 const noteApiController = require('../controllers/noteApiController');
+
+router.use(cors({ origin: '*' }));
 
 router.route('/')
   .get(noteApiController.getNotes)
