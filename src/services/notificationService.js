@@ -3,7 +3,7 @@ const NOTIFICATION_KEYS = {
   privateKey: '1mUhZujh2RehxXYzJrCmletSujj8FVlsAgjIAZZm27Q'
 };
 
-const NOTIFICATION_NEW_USER = { "title": "Expansion", "body": "A new reader has joined our ever growing community!" };
+const NOTIFICATION_NEW_USER = { 'title': 'Expansion', 'body': 'A new reader has joined our ever growing community!' };
 
 const webPush = require('web-push');
 
@@ -13,14 +13,28 @@ webPush.setVapidDetails(
   NOTIFICATION_KEYS.privateKey
 );
 const subscriptions = {};
+const validationService = require('./validationService');
 
-function setSubscription(userId, subscription) {
-  subscriptions[userId] = subscription;
+async function setSubscription (userId, body) {
+  await validationService.validateUserExistenceById(userId);
+  subscriptions[userId] = parseBodyToSubscription(body);
 }
 
-function sendNewUserNotification() {
+// prune subscription from unwanted/unnecessary properties
+function parseBodyToSubscription (body) {
+  return {
+    endpoint: body.endpoint,
+    expirationTime: null,
+    keys: {
+      p256dh: body.keys.p256dh,
+      auth: body.keys.auth
+    }
+  };
+}
+
+function sendNewUserNotification () {
   for (const userId in subscriptions) {
-    webPush.sendNotification(subscriptions.userId, JSON.stringify(NOTIFICATION_NEW_USER));
+    webPush.sendNotification(subscriptions[userId], JSON.stringify(NOTIFICATION_NEW_USER));
   }
 }
 

@@ -8,6 +8,7 @@ const app = express();
 const userRouter = require('./routes/userRoutes');
 const userBookRouter = require('./routes/userBookRoutes');
 const noteRouter = require('./routes/noteRoutes');
+const notificationRouter = require('./routes/notificationRoutes');
 const logRouter = require('./routes/logRoutes');
 
 // view engine setup
@@ -28,6 +29,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/api/users', userRouter);
 app.use('/api/users/:userId/books', userBookRouter);
 app.use('/api/users/:userId/books/:isbn/notes', noteRouter);
+// assignment required routes
+app.use('/api/users/:userId/notifications', notificationRouter);
 app.use('/logs', logRouter);
 
 // catch 404 and forward to error handler
