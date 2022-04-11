@@ -32,6 +32,6 @@ router.post(
     .isString()
     .withMessage('The auth must be a string.'),
   notificationController.postSubscription
-)
+);
 
 module.exports = router;

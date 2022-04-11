@@ -28,4 +28,4 @@ async function postSubscription (req, res) {
 
 module.exports = {
   postSubscription
-}
+};

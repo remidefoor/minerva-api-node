@@ -3,7 +3,7 @@ const NOTIFICATION_KEYS = {
   privateKey: '1mUhZujh2RehxXYzJrCmletSujj8FVlsAgjIAZZm27Q'
 };
 
-const NOTIFICATION_NEW_USER = { 'title': 'Expansion', 'body': 'A new reader has joined our ever growing community!' };
+const NOTIFICATION_NEW_USER = { title: 'Expansion', body: 'A new reader has joined our ever growing community!' };
 
 const webPush = require('web-push');
 
@@ -41,4 +41,4 @@ function sendNewUserNotification () {
 module.exports = {
   setSubscription,
   sendNewUserNotification
-}
+};
