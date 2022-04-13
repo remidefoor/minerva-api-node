@@ -30,7 +30,6 @@ model UserBook {
 
   @@id([ISBN, userId])
   @@index([userId], map: "book_user_user_id_foreign")
-
   @@map("book_user")
 }
 
@@ -44,6 +43,5 @@ model Note {
   user       User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "notes_user_id_foreign")
 
   @@index([userId], map: "notes_user_id_foreign")
-
   @@map("notes")
 }
