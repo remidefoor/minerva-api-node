@@ -11,13 +11,12 @@ describe(path.basename(__dirname), () => {
         const userId = await mySqlUserRepository.getUserId('harry.potter@hogwarts.wiz', 'Nimbus2000');
         assert.strictEqual(userId, 1);
       });
-      // TODO fix
-      /* it('should throw a forbidden HTTP error when the provided password is not correct', () => {
-        assert.throws(
-          () => mySqlUserRepository.getUserId('harry.potter@hogwarts.wiz', 'Firebolt'),
+      it('should throw a forbidden HTTP error when the provided password is not correct', () => {
+        assert.rejects(
+          async () => mySqlUserRepository.getUserId('harry.potter@hogwarts.wiz', 'Firebolt'),
           createError(403, 'The username or password is invalid.', { errors: [] })
         );
-      }); */
+      });
     });
   });
 });
