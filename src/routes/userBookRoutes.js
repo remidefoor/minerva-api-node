@@ -10,7 +10,7 @@ router.use(cors({ origin: '*' }));
 router.route('/')
   .get(userBookApiController.getUserBooks)
   .post(
-    body('isbn')
+    body('ISBN')
       .exists({ checkFalsy: true })
       .withMessage('The isbn field is required.')
       .isString()

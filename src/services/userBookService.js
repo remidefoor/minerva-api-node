@@ -8,7 +8,7 @@ async function retrieveUserBooks (userId) {
 
 async function addUserBook (userId, body) {
   await validationService.validateUserExistenceById(userId);
-  await mySqlUserBooksRepository.createUserBook(userId, body.isbn);
+  await mySqlUserBooksRepository.createUserBook(userId, body.ISBN);
 }
 
 async function removeUserBook (userId, isbn) {
