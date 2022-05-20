@@ -3,7 +3,7 @@
  */
 
 const app = require('../src/app');
-const debug = require('debug')('nodejs-backend:server'); // TODO remove
+const debug = require('debug')('nodejs-backend:server');
 const http = require('http');
 
 /**
